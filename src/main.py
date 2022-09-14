@@ -1,6 +1,8 @@
+from ui.ui import UI
 
 def main():
-    print("Text compression")
+    ui = UI()
+    ui.start()
 
 
 if __name__ == "__main__":
