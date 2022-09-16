@@ -1,4 +1,4 @@
-https://github.com/VoxBorealis/text_compressor_tira/workflows/CI/badge.svg
+![GitHub Actions](https://github.com/VoxBorealis/text_compressor_tira/workflows/CI/badge.svg)
 
 # text-compressor-tira
 
