@@ -1,4 +1,4 @@
-https://github.com/<OWNER>/<REPOSITORY>/workflows/<WORKFLOW_NAME>/badge.svg
+https://github.com/VoxBorealis/text_compressor_tira/workflows/CI/badge.svg
 
 # text-compressor-tira
 
