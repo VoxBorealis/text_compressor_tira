@@ -18,6 +18,6 @@ Hours spent:
 
 ## What I've had trouble with
 
-* Haven't found good information on how to write bit data in Python (This related to building the Huffman tree)
+* Haven't found good information on how to write binary data in Python (This related to building the Huffman tree)
 
 ## Plans for next week
