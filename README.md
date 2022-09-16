@@ -1,7 +1,7 @@
-![GitHub Actions](https://github.com/VoxBorealis/text_compressor_tira/workflows/CI/badge.svg)
-
 # text-compressor-tira
 
+![GitHub Actions](https://github.com/VoxBorealis/text_compressor_tira/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/VoxBorealis/text_compressor_tira/branch/main/graph/badge.svg?token=B7ZURMRPLA)](https://codecov.io/gh/VoxBorealis/text_compressor_tira)
 
 ## Links to documentation
 
