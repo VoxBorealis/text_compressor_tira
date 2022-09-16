@@ -49,7 +49,9 @@ class HuffmanService:
             tree.put(Node(c))
 
         print("--------------")
-        while not tree.empty():
+        
+
+        while not tree.empty:
             print(tree.get().value)
 
         return tree

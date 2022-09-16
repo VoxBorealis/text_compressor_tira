@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 _FILE_DIR_PATH = Path(__file__).parents[1].joinpath('data')
@@ -16,6 +15,11 @@ class FileRepository:
         self._dir_path = dir_path
 
     def list_all_files(self):
+        """Returns a list of all the files in the designated directory
+
+        Returns:
+            _array_: An array of the files
+        """
         files = []
         for i, file in enumerate(self._dir_path.iterdir()):
             files.append(file)
