@@ -1,6 +1,6 @@
 # Week 1
 
-Hours spent:
+Hours spent: 16h
 
 * 13.09 4h
 * 14.09 5h
