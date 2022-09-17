@@ -21,10 +21,10 @@ class HuffmanService:
         Args:
             file (.txt): A .txt file that will be compressed
         """
-        sorted = self._calculates_frequency()
+        sorted = self._calculate_frequency()
         tree = self._build_tree(sorted)
 
-    def _calculates_frequency(self):
+    def _calculate_frequency(self):
         """Calculates the frequency of each character using a dictionary and
         returns an array of Tuples (count (int), character (string))
 
