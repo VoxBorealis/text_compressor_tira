@@ -6,6 +6,7 @@ Hours spent:
 * 14.09 5h
 * 15.09 3h
 * 16.09 2h
+* 17.09 2h
 
 ## What I achieved this week
 
@@ -14,10 +15,14 @@ Hours spent:
 * A file management system with basic functionality
 * Started working on the Huffman algorithm
 * Enabled GitHub actions
-* Wrote my first test and added codecov coverage
+* Wrote my first tests and added codecov coverage
+* Added pycodestyle
 
 ## What I've had trouble with
 
-* Haven't found good information on how to write binary data in Python (This related to building the Huffman tree)
+* Haven't found good information on how to write binary data in Python (This relates to building the Huffman tree)
 
 ## Plans for next week
+
+* Find a way to efficiently write binary data
+* Achieve an early working version of the Huffman compression
