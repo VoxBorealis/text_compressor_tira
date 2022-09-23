@@ -24,6 +24,22 @@ class FileService:
         """
         files = self._file_repository.list_all_files()
         return files
+    
+    def get_file_contents(self, file):
+        """Returns the contents of the file as a string
 
+        Args:
+            file (file): A PosixPath of a .txt file
+
+        Returns:
+            str: Contents of the file as a string
+        """
+        return self._file_repository.get_file_contents(file)
+
+    def write_bin_file(self, file, code_table):
+        file_name = file.name[0:-4] + ".bin"
+        print(file_name)
+        file_as_str = self._file_repository.get_file_contents(file)
+        return self._file_repository.write_bin_file(file_name, file_as_str, code_table)
 
 file_service = FileService()

@@ -3,7 +3,8 @@ from services.file_service import file_service
 
 COMMANDS = {
     "0": "0 quit",
-    "1": "1 compress with Huffman"
+    "1": "1 compress with Huffman",
+    "2": "2 decompress Huffman"
 }
 
 
@@ -34,6 +35,9 @@ class UI:
                 chosen_file = self._ask_user_for_file()
                 huffman_service.file = chosen_file
                 huffman_service.compress()
+            elif command == "2":
+                chosen_file = self._ask_user_for_file()
+                huffman_service.decode(chosen_file)
 
     def _ask_user_for_file(self):
         """Prompts the user to choose a file from a list
