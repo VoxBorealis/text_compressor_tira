@@ -1,12 +1,15 @@
+from base64 import decode
 from queue import PriorityQueue
 from entities.node import Node
-from services.file_service import file_service
+from services.file_service import (
+    file_service as default_file_service
+)
 
 class HuffmanService:
     """Class responsible for the logic of the Huffman compression
     """
 
-    def __init__(self, file=None):
+    def __init__(self, file=None, file_service=default_file_service):
         """Class constructor
 
         Args:
@@ -14,6 +17,7 @@ class HuffmanService:
             compressed. Defaults to None.
         """
         self.file = file
+        self._file_service = file_service
     
     def compress(self):
         """The main function of the Huffman Encoding
@@ -27,27 +31,39 @@ class HuffmanService:
         self._build_code_table(tree, "", code_table)
 
         encoded_but_str = self._encode_contents(code_table)
-        if file_service.write_code_table(self.file, code_table) \
-            and file_service.write_bin_file(self.file, encoded_but_str):
+        if self._file_service.write_code_table(self.file, code_table) \
+            and self._file_service.write_bin_file(self.file, encoded_but_str):
             return True
         else: return False
 
-    def decode(self, file):
-        """Decodes the contents of a binary file and writes
-        a new text file.
+    def decompress(self, file):
+        """The main function of the Huffman Decoding
 
         Args:
             file (file): A binary file
-        
+
         Returns:
             boolean: True if successfully decompressed
         """
-        code_table = file_service.get_code_table(file)
-        with open(file, 'rb') as fh:
-            content = fh.read()
+        code_table = self._file_service.get_code_table(file)
+        bytes_content = self._file_service.get_bin_file_contents(file)
+        decoded_string = self._decode_bytes(bytes_content, code_table)
+
+        return self._file_service.write_text_file(file, decoded_string)
+
+    def _decode_bytes(self, bytes_content, code_table):
+        """Decodes the given string and returns the decoded string.
+
+        Args:
+            bytes_content (bytes): bytes object containing the encoded file's contents
+            code_table (dict): A dictionary containing the codes for decoding
+        
+        Returns:
+            str: The decoded string
+        """
         decoded_string = ""
         buffer = ""
-        for byte in content[:-1]:
+        for byte in bytes_content[:-1]:
             byte_as_str = (format(byte, '08b'))
             for bit in byte_as_str:
                 buffer = buffer + bit
@@ -57,7 +73,7 @@ class HuffmanService:
                 except:
                     pass
         #last byte is computed separately
-        last_byte = bin(content[-1])[2:]
+        last_byte = bin(bytes_content[-1])[2:]
         for bit in last_byte:
             buffer = buffer + bit
             try:
@@ -66,7 +82,7 @@ class HuffmanService:
             except:
                 pass
         
-        return file_service.write_text_file(file, decoded_string)
+        return decoded_string
 
     def _encode_contents(self, code_table):
         """Encodes the content of the original file into a
@@ -79,7 +95,7 @@ class HuffmanService:
             str: Contents of the original file in encoded format
         """
         encoded_but_str = ""
-        for c in file_service.get_file_contents(self.file):
+        for c in self._file_service.get_file_contents(self.file):
             encoded_but_str = encoded_but_str + code_table[c]
         
         return encoded_but_str
@@ -95,7 +111,7 @@ class HuffmanService:
         """
         char_dict = {}
 
-        file_as_str = file_service.get_file_contents(self.file)
+        file_as_str = self._file_service.get_file_contents(self.file)
         for char in file_as_str:
             if char not in char_dict:
                 char_dict[char] = 1

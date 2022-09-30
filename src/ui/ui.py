@@ -41,7 +41,7 @@ class UI:
                     print("Error")
             elif command == "2":
                 chosen_file = self._ask_user_for_file(command)
-                if huffman_service.decode(chosen_file):
+                if huffman_service.decompress(chosen_file):
                     print(f'Succesfully decoded {chosen_file.name}')
                 else:
                     print("Error")

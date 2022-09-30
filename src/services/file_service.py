@@ -50,6 +50,17 @@ class FileService:
             str: Contents of the file as a string
         """
         return self._file_repository.get_file_contents(file)
+    
+    def get_bin_file_contents(self, file):
+        """Returns the contents of a binary file
+
+        Args:
+            file (file): A binary file
+
+        Returns:
+            bytes: contents of the bin file in a bytes object
+        """
+        return self._file_repository.get_bin_file_contents(file)
 
     def write_bin_file(self, file, encoded_but_str):
         """Writes a binary file from the contents of the given string variable.

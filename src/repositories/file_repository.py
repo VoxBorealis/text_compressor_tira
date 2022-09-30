@@ -68,6 +68,20 @@ class FileRepository:
             contents = f.read()
         
         return contents
+    
+    def get_bin_file_contents(self, file):
+        """Returns the contents of a binary file
+
+        Args:
+            file (file): A binary file
+
+        Returns:
+            bytes: contents of the bin file in a bytes object
+        """
+        with open(file, 'rb') as bin_file:
+            bytes_content = bin_file.read()
+
+        return bytes_content
 
     def write_code_table(self, file_name, code_table):
         """Writes a .json file containing the code table
