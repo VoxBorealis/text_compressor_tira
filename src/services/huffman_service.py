@@ -25,7 +25,12 @@ class HuffmanService:
         tree = self._build_tree(char_freq)
         code_table = {}
         self._build_code_table(tree, "", code_table)
-        return self._encode_contents(code_table)
+
+        encoded_but_str = self._encode_contents(code_table)
+        if file_service.write_code_table(self.file, code_table) \
+            and file_service.write_bin_file(self.file, encoded_but_str):
+            return True
+        else: return False
 
     def decode(self, file):
         """Decodes the contents of a binary file and writes
@@ -64,25 +69,21 @@ class HuffmanService:
         return file_service.write_text_file(file, decoded_string)
 
     def _encode_contents(self, code_table):
-        """Encodes the content of the original file into a binary file
-        using the code table, also saves the code table to a JSON file.
+        """Encodes the content of the original file into a
+        string using the code table.
 
         Args:
             code_table (dict): Huffman Encoding code table
 
         Returns:
-            boolean: True if encoding successful
+            str: Contents of the original file in encoded format
         """
-        if file_service.write_code_table(self.file, code_table):
-            encoded_but_str = ""
-            for c in file_service.get_file_contents(self.file):
-                encoded_but_str = encoded_but_str + code_table[c]
+        encoded_but_str = ""
+        for c in file_service.get_file_contents(self.file):
+            encoded_but_str = encoded_but_str + code_table[c]
+        
+        return encoded_but_str
 
-            return file_service.write_bin_file(
-                self.file, encoded_but_str
-            )
-        else:
-            return False
 
     def _calculate_frequency(self):
         """Calculates the frequency of each character using a dictionary and

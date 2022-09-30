@@ -90,7 +90,7 @@ class FileService:
             code_table (dict): Dictionary containing key, value pairs of all the symbols and their respective codes.
 
         Returns:
-            json: Returns a json file containing key, value pairs of all the codes and their respective symbols
+            boolean: True if writing was successful
         """
         file_name = file.name[0:-4] + ".json"
         code_table_swapped = {v: k for k, v in code_table.items()}
