@@ -4,7 +4,8 @@ from services.file_service import file_service
 COMMANDS = {
     "0": "0 quit",
     "1": "1 compress with Huffman",
-    "2": "2 decompress Huffman"
+    "2": "2 decompress Huffman",
+    "3": "3 show all files & sizes"
 }
 
 
@@ -32,24 +33,45 @@ class UI:
             if command == "0":
                 break
             elif command == "1":
-                chosen_file = self._ask_user_for_file()
+                chosen_file = self._ask_user_for_file(command)
                 huffman_service.file = chosen_file
-                huffman_service.compress()
+                if huffman_service.compress():
+                    print(f'Successfully compressed {chosen_file.name} \N{grinning face}')
+                else:
+                    print("Error")
             elif command == "2":
-                chosen_file = self._ask_user_for_file()
-                huffman_service.decode(chosen_file)
+                chosen_file = self._ask_user_for_file(command)
+                if huffman_service.decode(chosen_file):
+                    print(f'Succesfully decoded {chosen_file.name}')
+                else:
+                    print("Error")
+            elif command == "3":
+                self._print_all_files_and_sizes()
 
-    def _ask_user_for_file(self):
+    def _ask_user_for_file(self, command):
         """Prompts the user to choose a file from a list
 
         Returns:
             .txt: text file chosen by the user to be compressed
         """
-        print("Which file would you like to compress?")
-        files = file_service.get_list_of_files()
+        if command == "1":
+            print("Which file would you like to compress?")
+            files = file_service.get_list_of_txt_files()
+        if command == "2":
+            print("Which file would you like to decode?")
+            files = file_service.get_list_of_bin_files()
+
+        for i, file in enumerate(files):
+            print(f'{i}: {file.name} - size: {file.stat().st_size} bytes')
+
         selected_file = files[int(input("select file (0-9):"))]
 
         return selected_file
+
+    def _print_all_files_and_sizes(self):
+        files = file_service.get_list_of_files()
+        for i, file in enumerate(files):
+            print(f'{i}: {file.name} - size: {file.stat().st_size} bytes')
 
 
 ui = UI()
