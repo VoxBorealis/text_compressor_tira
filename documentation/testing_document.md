@@ -3,6 +3,7 @@
 Test coverage can be found here at [Codecov](https://app.codecov.io/gh/VoxBorealis/text_compressor_tira)
 
 Unit testing tool: pytest
+
 Run tests:
 ```bash
 poetry run invoke test
@@ -13,7 +14,7 @@ Get coverage locally (html):
 poetry run invoke coverage-report
 ```
 
-### What was tested & how
+### What was tested & how.
 
 #### Huffman Service:
 
@@ -22,7 +23,7 @@ Example: The testing "file" is "aaaabbbccd", so I manually created a character f
 
 Testing for other functions was performed in a similiar fashion.
 
-#### File Service
+#### File Service:
 
 
 ## Performance testing
