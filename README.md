@@ -17,6 +17,7 @@
 * [Weekly report #2](https://github.com/VoxBorealis/text_compressor_tira/blob/main/documentation/Weekly%20Reports/weekly_report_2.md)
 * [Weekly report #3](https://github.com/VoxBorealis/text_compressor_tira/blob/main/documentation/Weekly%20Reports/weekly_report_3.md)
 * [Weekly report #4](https://github.com/VoxBorealis/text_compressor_tira/blob/main/documentation/Weekly%20Reports/weekly_report_4.md)
+* [Weekly report #5](./documentation/Weekly%20Reports/weekly_report_5.md)
 
 ## Installation
 

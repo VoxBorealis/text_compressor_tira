@@ -57,15 +57,22 @@ class UI:
                     print("Error")
             elif command == "3":
                 chosen_file = self._ask_user_for_file(command)
-                lzw_service.compress(chosen_file)
+                start_time = time.perf_counter()
+                if lzw_service.compress(chosen_file):
+                    end_time = time.perf_counter()
+                    self.io_send(f'Successfully compressed {chosen_file.name} \N{grinning face} \
+                        \nexecution time: {end_time - start_time:0.6f}s')
+                else:
+                    print("Error")
             
             elif command == "4":
                 chosen_file = self._ask_user_for_file(command)
                 start_time = time.perf_counter()
-                lzw_service.decompress(chosen_file)
-                end_time = time.perf_counter()
-                self.io_send(f'Successfully decompressed {chosen_file.name} \N{grinning face} \
-                    \nexecution time: {end_time - start_time:0.6f}s')
+                if lzw_service.decompress(chosen_file):
+                    end_time = time.perf_counter()
+                    self.io_send(f'Successfully decompressed {chosen_file.name} \N{grinning face} \
+                        \nexecution time: {end_time - start_time:0.6f}s')
+                else: print("Error")
 
             elif command == "ls":
                 self._print_all_files_and_sizes()
