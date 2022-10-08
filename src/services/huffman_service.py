@@ -1,3 +1,4 @@
+from io import StringIO
 from queue import PriorityQueue
 from entities.node import Node
 from services.file_service import (
@@ -67,7 +68,7 @@ class HuffmanService:
             for bit in byte_as_str:
                 buffer = buffer + bit
                 try:
-                    decoded_string = decoded_string + code_table[buffer]
+                    decoded_string += code_table[buffer]
                     buffer = ""
                 except:
                     pass
@@ -76,11 +77,10 @@ class HuffmanService:
         for bit in last_byte:
             buffer = buffer + bit
             try:
-                decoded_string = decoded_string + code_table[buffer]
+                decoded_string +=  code_table[buffer]
                 buffer = ""
             except:
                 pass
-        
         return decoded_string
 
     def _encode_contents(self, code_table):

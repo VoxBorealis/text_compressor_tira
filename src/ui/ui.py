@@ -1,12 +1,15 @@
 import time
 from services.huffman_service import huffman_service
+from services.lzw_service import lzw_service
 from services.file_service import file_service
 
 COMMANDS = {
     "0": "0 quit",
     "1": "1 compress with Huffman",
     "2": "2 decompress Huffman",
-    "3": "3 show all files & sizes"
+    "3": "3 compress with LZW",
+    "4": "4 decompress with LZW",
+    "ls": "ls show all files & sizes"
 }
 
 
@@ -53,6 +56,18 @@ class UI:
                 else:
                     print("Error")
             elif command == "3":
+                chosen_file = self._ask_user_for_file(command)
+                lzw_service.compress(chosen_file)
+            
+            elif command == "4":
+                chosen_file = self._ask_user_for_file(command)
+                start_time = time.perf_counter()
+                lzw_service.decompress(chosen_file)
+                end_time = time.perf_counter()
+                self.io_send(f'Successfully decompressed {chosen_file.name} \N{grinning face} \
+                    \nexecution time: {end_time - start_time:0.6f}s')
+
+            elif command == "ls":
                 self._print_all_files_and_sizes()
 
     def _ask_user_for_file(self, command):
@@ -61,10 +76,10 @@ class UI:
         Returns:
             .txt: text file chosen by the user to be compressed
         """
-        if command == "1":
+        if command in ["1", "3"]:
             print("Which file would you like to compress?")
             files = file_service.get_list_of_txt_files()
-        if command == "2":
+        if command in ["2", "4"]:
             print("Which file would you like to decode?")
             files = file_service.get_list_of_bin_files()
 

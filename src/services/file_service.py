@@ -76,6 +76,10 @@ class FileService:
         """
         file_name = file.name[0:-4] + ".bin"
         return self._file_repository.write_bin_file(file_name, encoded_but_str)
+    
+    def write_bin_file_from_bytes(self, file, data):
+        file_name = file.name[0:-4] + ".bin"
+        return self._file_repository.write_bin_file_from_bytes(data, file_name)
 
     def write_text_file(self, file, content):
         """Writes a text file from the contents of the given

@@ -37,7 +37,8 @@ class FileRepository:
         """
         files = []
         for file in self._dir_path.iterdir():
-            if file.name.endswith('.txt'):
+            if file.name.endswith('.txt') and \
+                "compressed" not in file.name:
                 files.append(file)
         
         return files
@@ -163,6 +164,14 @@ class FileRepository:
             b.append(int(data[i:i+8], 2))
         
         return bytes(b)
+    
+    def write_bin_file_from_bytes(self, data, file_name):
+        path_name = _FILE_DIR_PATH.joinpath(file_name)
+        try:
+            with open(path_name, 'wb') as fh:
+                fh.write(data)
+            return True
+        except: return False
         
 
 file_repository = FileRepository(_FILE_DIR_PATH)
