@@ -1,4 +1,5 @@
 ## Project structure
+![Screenshot](./project_structure.png)
 
 ## Time & Space complexities
 
