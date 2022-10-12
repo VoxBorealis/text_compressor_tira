@@ -47,7 +47,6 @@ class LZWService:
                 prev = c
         if prev:
             result.append(code_dict[prev])
-
         bytes = self._format_int_list_to_bytes(result, BYTE_LEN)
 
         return self._file_service.write_bin_file_from_bytes(file, bytes)

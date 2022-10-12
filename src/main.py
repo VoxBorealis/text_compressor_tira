@@ -1,4 +1,3 @@
-import cProfile
 from ui.ui import UI
 
 
@@ -10,5 +9,4 @@ def main():
 
 
 if __name__ == "__main__":
-    cProfile.run('main()')
-    #main()
+    main()

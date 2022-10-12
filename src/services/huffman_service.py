@@ -1,4 +1,3 @@
-from io import StringIO
 from queue import PriorityQueue
 from entities.node import Node
 from services.file_service import (
@@ -34,7 +33,8 @@ class HuffmanService:
         if self._file_service.write_code_table(self.file, code_table) \
             and self._file_service.write_bin_file(self.file, encoded_but_str):
             return True
-        else: return False
+        
+        return False
 
     def decompress(self, file):
         """The main function of the Huffman Decoding
