@@ -23,7 +23,18 @@ Example: The testing "file" is "aaaabbbccd", so I manually created a character f
 
 Testing for other functions was performed in a similiar fashion.
 
+#### LZW Service:
+
+Testing differentiated a bit from Huffman Service because there were fewer functions. Most of the logic is done inside the
+compress and decompress functions.
+
+Testing data is located at src/tests/data.
+The data is fetched using a FakeFileService class and we perform the LZW functions on this data, confirming on each step,
+that the correct results are outputted.
+
 #### File Service:
 
+Many of the functions here are just calls to the repository functions so they are not tested.
+However there are some functions where I tested that the correct file names are being given to file_repository.
 
 ## Performance testing

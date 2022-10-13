@@ -172,6 +172,14 @@ class FileRepository:
                 fh.write(data)
             return True
         except: return False
+    
+    def get_bin_file_from_original(self, file):
+        bin_file = _FILE_DIR_PATH.joinpath(file.name[:-4] + ".bin")
+        return bin_file
+
+    def get_json_file_from_original(self, file):
+        json_file = _FILE_DIR_PATH.joinpath(file.name[:-4] + ".json")
+        return json_file
         
 
 file_repository = FileRepository(_FILE_DIR_PATH)

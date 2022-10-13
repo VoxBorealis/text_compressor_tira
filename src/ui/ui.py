@@ -43,7 +43,8 @@ class UI:
                 if huffman_service.compress():
                     end_time = time.perf_counter()
                     self.io_send(f'Successfully compressed {chosen_file.name} \N{grinning face} \
-                        \nexecution time: {end_time - start_time:0.6f}s')
+                        \nexecution time: {end_time - start_time:0.6f}s\
+                        \ntotal size: {file_service.get_size_difference(chosen_file, "huffman")}% of original')
                 else:
                     print("Error")
             elif command == "2":
@@ -61,7 +62,8 @@ class UI:
                 if lzw_service.compress(chosen_file):
                     end_time = time.perf_counter()
                     self.io_send(f'Successfully compressed {chosen_file.name} \N{grinning face} \
-                        \nexecution time: {end_time - start_time:0.6f}s')
+                        \nexecution time: {end_time - start_time:0.6f}s\
+                        \ntotal size: {file_service.get_size_difference(chosen_file, "lzw")}% of original')
                 else:
                     print("Error")
             

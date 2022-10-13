@@ -123,5 +123,24 @@ class FileService:
         """
         file_name = file.name[0:-4] + ".json"
         return self._file_repository.open_code_table(file_name)
+    
+    def get_size_difference(self, file, type):
+        """Returns the size reduction from compression
+
+        Args:
+            file (file): original file
+
+        Returns:
+            float: size reduction in percentage
+        """
+        compressed_size = self._file_repository.\
+            get_bin_file_from_original(file).stat().st_size
+
+        if type == "huffman":
+            code_table_size = self._file_repository.\
+                get_json_file_from_original(file).stat().st_size
+            compressed_size += code_table_size
+        return round(compressed_size / file.stat().st_size * 100, 2)
+        
 
 file_service = FileService()

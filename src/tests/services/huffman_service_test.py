@@ -111,3 +111,6 @@ class TestHuffmanService(unittest.TestCase):
     
     def test_decompression_returns_true_when_writes_successful(self):
         self.assertTrue(self.huffman_service.decompress("test"))
+
+    def test_decompresion_returns_false_when_writes_fail(self):
+        self.assertFalse(self.huffman_service.decompress(""))
