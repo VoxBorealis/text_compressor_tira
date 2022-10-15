@@ -2,17 +2,30 @@ import unittest
 from pathlib import Path
 from services.file_service import FileService
 
+class FakeStat:
+    def __init__(self, size):
+        self.st_size = size
+
+class FakeFile:
+    def __init__(self, name, size):
+        self.name = name
+        self.size = size
+
+    def stat(self):
+        return FakeStat(self.size)
+
 class FakeFileRepository:
     def __init__(self, files=None):
-        self.path = Path(__file__).parents[1].joinpath('data')
-        self.files = self.list_all_files()
+        #self.path = Path(__file__).parents[1].joinpath('data')
+        #self.files = self.list_all_files()
+        self.files = []
+        self.files.append(FakeFile("test.txt", 100))
+        self.files.append(FakeFile("test.bin", 50))
+
 
     def list_all_files(self):
-        files = []
-        for file in self.path.iterdir():
-            files.append(file)
 
-        return files
+        return self.files
     
     def write_bin_file(self, file_name, encoded_but_str):
         return file_name
@@ -53,8 +66,8 @@ class TestFileService(unittest.TestCase):
 
     def test_get_size_difference_return_correct_with_huffman(self):
         size = self.file_service.get_size_difference(self.test_file, "huffman")
-        self.assertEqual(size, 243216.67)
+        self.assertEqual(size, 100)
 
     def test_get_size_difference_return_correct_with_lzw(self):
         size = self.file_service.get_size_difference(self.test_file, "lzw")
-        self.assertEqual(size, 121608.33)
+        self.assertEqual(size, 50)
