@@ -1,10 +1,11 @@
 # Week 6
 
-Hours spent: 9
+Hours spent: 10
 
 * 12.10: 3
 * 13.10: 3
 * 14.10: 3
+* 15.10: 1
 
 ## What I achieved this week
 
