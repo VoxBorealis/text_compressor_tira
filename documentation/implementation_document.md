@@ -63,8 +63,13 @@ A better solution would be to store the tree on the same file as the encoded con
 ## Sources
 
 [Wikipedia: Huffman coding](https://en.wikipedia.org/wiki/Huffman_coding)
+
 [Wikipedia: LZW](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch)
+
 [Efficient way of storing Huffman tree](https://stackoverflow.com/questions/759707/efficient-way-of-storing-huffman-tree)
+
 [The Canterbury Corpus](https://corpus.canterbury.ac.nz/descriptions/#cantrbry)
+
 [Huffman exlpained with images](https://www.programiz.com/dsa/huffman-coding)
+
 [Python BitManipulation](https://wiki.python.org/moin/BitManipulation)
