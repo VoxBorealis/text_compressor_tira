@@ -42,8 +42,8 @@ class UI:
                 start_time = time.perf_counter()
                 if huffman_service.compress(chosen_file):
                     end_time = time.perf_counter()
-                    self.io_compress(chosen_file.name, start_time,
-                                     end_time, chosen_file)
+                    self.io_compress(chosen_file, start_time,
+                                     end_time, "huffman")
                 else:
                     print("Error")
             elif command == "2":
@@ -60,8 +60,8 @@ class UI:
                 start_time = time.perf_counter()
                 if lzw_service.compress(chosen_file):
                     end_time = time.perf_counter()
-                    self.io_compress(chosen_file.name, start_time,
-                                     end_time, chosen_file)
+                    self.io_compress(chosen_file, start_time,
+                                     end_time, "lzw")
                 else:
                     print("Error")
 
@@ -107,12 +107,15 @@ class UI:
         for i, file in enumerate(files):
             print(f'{i}: {file.name} - size: {file.stat().st_size} bytes')
 
-    def io_compress(self, name, s_time, e_time, file):
-        print(f'---------------------------------\
-            \nSuccessfully compressed {name} \N{grinning face}\
-            \nexecution time: {e_time - s_time:0.6f}s\
-            \ntotal size: {file_service.get_size_difference(file)}%\
-             of original\n---------------------------------')
+    def io_compress(self, file, s_time, e_time, type):
+        print(
+            f'---------------------------------\n'
+            f'Successfully compressed {file.name} \N{grinning face}\n'
+            f'execution time: {e_time - s_time:0.6f}s\n'
+            f'total size: {file_service.get_size_difference(file, type)}% '
+            f'of original\n'
+            f'---------------------------------'
+        )
 
     def io_decompress(self, name, s_time, e_time):
         print(f'---------------------------------\

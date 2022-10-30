@@ -71,7 +71,7 @@ class HuffmanService:
                 try:
                     decoded_string += code_table[buffer]
                     buffer = ""
-                except ValueError:
+                except Exception:
                     pass
         # last byte is computed separately
         # because we want to use the bin() function rather than format()
@@ -83,7 +83,7 @@ class HuffmanService:
             try:
                 decoded_string += code_table[buffer]
                 buffer = ""
-            except ValueError:
+            except Exception:
                 pass
         return decoded_string
 
