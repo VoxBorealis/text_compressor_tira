@@ -34,8 +34,15 @@ poetry install
 poetry run invoke start
 ```
 
-## How to use
+## User Manual
 
-The program only accepts .txt files at this point. 
-1. Move your desired text file into the data folder under /src
-2. Follow the prompts from the program to compress it!
+### Compression
+
+1. Move your desired text files into the data folder under /src
+2. Follow the prompts from the program to compress it, using either Huffman or LZW!
+3. Your compressed file should now be a .bin file in the same data folder
+
+### Decompression
+
+1. Follow the prompts from the program to decompress a .bin file
+2. Your decompressed file should now be in the data folder with the name: {file_name}_decompressed

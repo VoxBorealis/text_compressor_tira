@@ -118,6 +118,17 @@ tomli = ">=1.0.0"
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
+name = "tabulate"
+version = "0.9.0"
+description = "Pretty-print tabular data"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+widechars = ["wcwidth"]
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -128,7 +139,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "2b485f239402b2094fb71db091ec97e544465ea73894c241fcac2d247d8662ce"
+content-hash = "3c8b1dbddac765f16d0c6a387c951736c07a967799dc4f18058ae8aa9ee6a403"
 
 [metadata.files]
 attrs = []
@@ -154,4 +165,5 @@ py = [
 pycodestyle = []
 pyparsing = []
 pytest = []
+tabulate = []
 tomli = []

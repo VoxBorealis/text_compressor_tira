@@ -28,7 +28,7 @@ class FileRepository:
             files.append(file)
 
         return files
-    
+
     def list_txt_files(self):
         """Returns a list of all the text files in the designated directory.
 
@@ -38,11 +38,11 @@ class FileRepository:
         files = []
         for file in self._dir_path.iterdir():
             if file.name.endswith('.txt') and \
-                "compressed" not in file.name:
+                    "compressed" not in file.name:
                 files.append(file)
-        
+
         return files
-    
+
     def list_bin_files(self):
         """Returns a list of all the binary files in the designated directory.
 
@@ -55,7 +55,7 @@ class FileRepository:
                 files.append(file)
 
         return files
-        
+
     def get_file_contents(self, file):
         """Returns the contents of the file as a string
 
@@ -67,9 +67,9 @@ class FileRepository:
         """
         with open(file) as f:
             contents = f.read()
-        
+
         return contents
-    
+
     def get_bin_file_contents(self, file):
         """Returns the contents of a binary file
 
@@ -91,7 +91,7 @@ class FileRepository:
         Args:
             file_name (str): Name of the file to be written
             code_table (dict): A dictionary containing the Huffman Encoding
-        
+
         Returns:
             boolean: True if the writing was successful
         """
@@ -100,8 +100,9 @@ class FileRepository:
             with open(path_name, 'w') as json_file:
                 json_file.write(json.dumps(code_table))
             return True
-        except: return False
-    
+        except Exception:
+            return False
+
     def open_code_table(self, file_name):
         """Returns the Huffman Encoding code table
 
@@ -114,9 +115,9 @@ class FileRepository:
         path_name = _FILE_DIR_PATH.joinpath(file_name)
         with open(path_name) as json_file:
             code_table = json.load(json_file)
-        
+
         return code_table
-    
+
     def write_text_file(self, content, file_name):
         """Writes a text file from the contents of the given string
 
@@ -132,14 +133,16 @@ class FileRepository:
             with open(path_name, 'w') as text_file:
                 text_file.write(content)
             return True
-        except: return False
+        except Exception:
+            return False
 
     def write_bin_file(self, file_name, encoded_but_str):
         """Writes a binary file from the contents of a string
         that represents the bits
 
         Args:
-            file_name (str): Name of the file that will be created, e.g ('example.bin')
+            file_name (str): Name of the file that will be created,
+                             e.g ('example.bin')
             encoded_but_str (str): A string variable containing "fake bits"
         """
         path_name = _FILE_DIR_PATH.joinpath(file_name)
@@ -148,8 +151,9 @@ class FileRepository:
             with open(path_name, 'wb') as fh:
                 fh.write(self._to_Bytes(encoded_but_str))
             return True
-        except: return False
-        
+        except Exception:
+            return False
+
     def _to_Bytes(self, data):
         """Converts a string containing fake bits, into real bytes
 
@@ -162,17 +166,18 @@ class FileRepository:
         b = bytearray()
         for i in range(0, len(data), 8):
             b.append(int(data[i:i+8], 2))
-        
+
         return bytes(b)
-    
+
     def write_bin_file_from_bytes(self, data, file_name):
         path_name = _FILE_DIR_PATH.joinpath(file_name)
         try:
             with open(path_name, 'wb') as fh:
                 fh.write(data)
             return True
-        except: return False
-    
+        except Exception:
+            return False
+
     def get_bin_file_from_original(self, file):
         bin_file = _FILE_DIR_PATH.joinpath(file.name[:-4] + ".bin")
         return bin_file
@@ -180,6 +185,6 @@ class FileRepository:
     def get_json_file_from_original(self, file):
         json_file = _FILE_DIR_PATH.joinpath(file.name[:-4] + ".json")
         return json_file
-        
+
 
 file_repository = FileRepository(_FILE_DIR_PATH)

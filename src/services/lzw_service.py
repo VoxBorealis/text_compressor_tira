@@ -5,22 +5,24 @@ from math import ceil, floor
 
 
 class LZWService:
-    """Class responsible for the logic of the Lempel-Ziv-Welch compression algorithm
+    """Class responsible for the logic of the Lempel-Ziv-Welch
+    compression algorithm.
     """
 
     def __init__(self, file_service=default_file_service):
         """Class constructor
 
         Args:
-            file_service (FileService, optional): File Service, gives functions for file handling. 
+            file_service (FileService, optional): File Service, gives
+                                                  functions for file handling.
         Defaults to default_file_service.
         """
         self._file_service = file_service
 
     def compress(self, file):
         """Main funtion of the Lempel-Ziv-Welch compression algorithm.
-        Initializes a dictionary containing all the ASCII symbols. As it processes the
-        input, it will update the dictionary with new words.
+        Initializes a dictionary containing all the ASCII symbols. As it
+        processes the input, it will update the dictionary with new words.
 
         Args:
             file (file): Input file
@@ -28,7 +30,7 @@ class LZWService:
             boolean: True if compression successful
         """
         BYTE_LEN = 12
-        MAX_DICT_SIZE = pow(2, BYTE_LEN) # 4096
+        MAX_DICT_SIZE = pow(2, BYTE_LEN)  # 4096
         content = self._file_service.get_file_contents(file)
         result = []
         code_dict_size = 256
@@ -50,12 +52,13 @@ class LZWService:
         bytes = self._format_int_list_to_bytes(result, BYTE_LEN)
 
         return self._file_service.write_bin_file_from_bytes(file, bytes)
-    
+
     def decompress(self, file):
         """Lempel-Ziv-Welch decoding algorithm.
         Initializes the code dictionary with all ASCII symbols and
         expands it as it reads the input. Using the dictionary, the algorithm
-        decodes the content of a binary file into a string and writes a text file.
+        decodes the content of a binary file into a string
+        and writes a text file.
 
         Args:
             file (file): An LZW encoded binary file
@@ -64,7 +67,7 @@ class LZWService:
             boolean: True if decompression successful
         """
         BYTE_LEN = 12
-        MAX_DICT_SIZE = pow(2, BYTE_LEN) # 4096
+        MAX_DICT_SIZE = pow(2, BYTE_LEN)  # 4096
 
         content = self._file_service.get_bin_file_contents(file)
         data_list = self._format_bytes_to_int_list(content, BYTE_LEN)
@@ -107,10 +110,10 @@ class LZWService:
         n_extended_bytes = floor(len(bits) / BYTE_LEN)
         bits = bits[-n_extended_bytes * BYTE_LEN:]
         data_list = [int(bits[i*BYTE_LEN:(i+1)*BYTE_LEN], 2)
-                        for i in range(n_extended_bytes)]
-        
+                     for i in range(n_extended_bytes)]
+
         return data_list
-    
+
     def _format_int_list_to_bytes(self, content, BYTE_LEN):
         """Formats an int list into bytes of certain length.
 
@@ -125,5 +128,6 @@ class LZWService:
         bytes = int(bits, 2).to_bytes(ceil(len(bits) / 8), 'big')
 
         return bytes
+
 
 lzw_service = LZWService()

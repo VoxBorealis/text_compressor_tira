@@ -15,7 +15,7 @@ class Node:
         self.value = value
         self.left_child = left_child
         self.right_child = right_child
-    
+
     def is_leaf(self):
         if not self.left_child or not self.right_child:
             return True
@@ -39,4 +39,3 @@ class Node:
     def __ge__(self, other):
         return (self.value[0] > other.value[0]) or \
             (self.value[0] == other.value[0])
-    

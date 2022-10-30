@@ -4,12 +4,13 @@ from services.lzw_service import lzw_service
 from services.file_service import file_service
 
 COMMANDS = {
-    "0": "0 quit",
-    "1": "1 compress with Huffman",
-    "2": "2 decompress Huffman",
-    "3": "3 compress with LZW",
-    "4": "4 decompress with LZW",
-    "ls": "ls show all files & sizes"
+    "0": "0: quit",
+    "1": "1: compress with Huffman",
+    "2": "2: decompress Huffman",
+    "3": "3: compress with LZW",
+    "4": "4: decompress with LZW",
+    "ls": "ls: show all files & sizes",
+    "h": "h: show commands"
 }
 
 
@@ -39,12 +40,10 @@ class UI:
             elif command == "1":
                 chosen_file = self._ask_user_for_file(command)
                 start_time = time.perf_counter()
-                huffman_service.file = chosen_file
-                if huffman_service.compress():
+                if huffman_service.compress(chosen_file):
                     end_time = time.perf_counter()
-                    self.io_send(f'Successfully compressed {chosen_file.name} \N{grinning face} \
-                        \nexecution time: {end_time - start_time:0.6f}s\
-                        \ntotal size: {file_service.get_size_difference(chosen_file, "huffman")}% of original')
+                    self.io_compress(chosen_file.name, start_time,
+                                     end_time, chosen_file)
                 else:
                     print("Error")
             elif command == "2":
@@ -52,8 +51,8 @@ class UI:
                 start_time = time.perf_counter()
                 if huffman_service.decompress(chosen_file):
                     end_time = time.perf_counter()
-                    self.io_send(f'Successfully decompressed {chosen_file.name} \N{grinning face} \
-                        \nexecution time: {end_time - start_time:0.6f}s')
+                    self.io_decompress(chosen_file.name,
+                                       start_time, end_time)
                 else:
                     print("Error")
             elif command == "3":
@@ -61,23 +60,27 @@ class UI:
                 start_time = time.perf_counter()
                 if lzw_service.compress(chosen_file):
                     end_time = time.perf_counter()
-                    self.io_send(f'Successfully compressed {chosen_file.name} \N{grinning face} \
-                        \nexecution time: {end_time - start_time:0.6f}s\
-                        \ntotal size: {file_service.get_size_difference(chosen_file, "lzw")}% of original')
+                    self.io_compress(chosen_file.name, start_time,
+                                     end_time, chosen_file)
                 else:
                     print("Error")
-            
+
             elif command == "4":
                 chosen_file = self._ask_user_for_file(command)
                 start_time = time.perf_counter()
                 if lzw_service.decompress(chosen_file):
                     end_time = time.perf_counter()
-                    self.io_send(f'Successfully decompressed {chosen_file.name} \N{grinning face} \
-                        \nexecution time: {end_time - start_time:0.6f}s')
-                else: print("Error")
+                    self.io_decompress(chosen_file.name,
+                                       start_time, end_time)
+                else:
+                    print("Error")
 
             elif command == "ls":
                 self._print_all_files_and_sizes()
+
+            elif command == "h":
+                for c in COMMANDS:
+                    print(COMMANDS[c])
 
     def _ask_user_for_file(self, command):
         """Prompts the user to choose a file from a list
@@ -103,10 +106,18 @@ class UI:
         files = file_service.get_list_of_files()
         for i, file in enumerate(files):
             print(f'{i}: {file.name} - size: {file.stat().st_size} bytes')
-        
-    def io_send(self, message):
+
+    def io_compress(self, name, s_time, e_time, file):
         print(f'---------------------------------\
-            \n{message} \n---------------------------------')
+            \nSuccessfully compressed {name} \N{grinning face}\
+            \nexecution time: {e_time - s_time:0.6f}s\
+            \ntotal size: {file_service.get_size_difference(file)}%\
+             of original\n---------------------------------')
+
+    def io_decompress(self, name, s_time, e_time):
+        print(f'---------------------------------\
+            \nSuccessfully decompressed {name} \N{grinning face}\
+            \nexecution time: {e_time - s_time:0.6f}s')
 
 
 ui = UI()
