@@ -46,3 +46,10 @@ poetry run invoke start
 
 1. Follow the prompts from the program to decompress a .bin file
 2. Your decompressed file should now be in the data folder with the name: {file_name}_decompressed
+
+## Commands
+
+Check codestyle:
+```
+poetry run invoke codestyle
+```
