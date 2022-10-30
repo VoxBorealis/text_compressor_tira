@@ -3,6 +3,11 @@
 ![GitHub Actions](https://github.com/VoxBorealis/text_compressor_tira/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/VoxBorealis/text_compressor_tira/branch/main/graph/badge.svg?token=B7ZURMRPLA)](https://codecov.io/gh/VoxBorealis/text_compressor_tira)
 
+Text compressor developed as a part of [Data Structures & Algorithms Project Course](https://tiralabra.github.io/2022_p1/) at University of Helsinki.
+Both, Huffman and Lempel-Ziv-Welch algorithms, have been implemented into the compressor.
+
+See the [Implementation document](https://github.com/VoxBorealis/text_compressor_tira/blob/main/documentation/implementation_document.md) for performance results.
+
 ## Links to documentation
 
 ### [Design document](https://github.com/VoxBorealis/text_compressor_tira/blob/main/documentation/design_document.md)
